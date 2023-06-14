@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Koding Pro</title>
+  <link href="assets/bootstap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <link href="assets/css/font.css" rel="stylesheet" />
+  <link href="assets/css/pie chart.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class=" container-fluid">
+        <button class="btn btn-warning btn-sidebar" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"></li>
+          </ul>
+          <span class="navbar-text em-" style="color: white">
+            Rizki Mufid
+            <img src="assets/img/pp.jpg" alt="pp" width="42" height="42" style="border-radius: 100%" /></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- offcanvas -->
+
+    <div class="offcanvas-lg offcanvas-start sidebar-nav fixposisi text-white" tabindex="-1" id="offcanvasResponsive"
+      aria-labelledby="offcanvasResponsiveLabel" data-bs-scroll="true" style="background-color: #212130">
+      <div class="offcanvas-header justify-content-end">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive"
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="sidebar mt-3">
+          <p style="font-size: 21px; font-weight: bold" class="mb-4">
+            Koding Pro
+          </p>
+
+          <div class="profile">
+            <img src="assets/img/pp.jpg" width="62" height="62" alt="Photo Profile Pengguna"
+              style="border-radius: 100%" />
+            <p>Rizki Mufid</p>
+          </div>
+          <div class="listnav">
+            <a href="./" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/grid/dashboard.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/grid/dashboard.svg" alt="" class="img-bottom">
+              </span>Dashboard</a>
+
+            <a href="" class="navbutton active">
+              <span>
+                <img src="assets/svg/icon/dark/Peoples/user.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
+              </span>
+              Mentor</a>
+            <a href="" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
+              </span>
+              Kelas</a>
+            <a href="" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
+              </span>Schedule</a>
+            <a href="" class="navbutton unactive logout-button">
+              <span>
+                <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/logout.svg" alt="" class="img-bottom">
+              </span>
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end offcanvas -->
+
+    <!-- start main -->
+
+    <main class="mt-6">
+      <div class="container-fluid">
+        <div class="welcome ">
+          <h1 class="bold">Mentor</h1>
+          <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
+        </div>
+        <table class="tabel">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Nama</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Aksi</th>
+            </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>Owi</td>
+                <td>woichan@gmail.com</td>
+                <td>Padang</td>
+                <td>089528496623</td>
+                <td><div class="action-group">
+                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
+                </div></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Owi</td>
+                <td>woichan@gmail.com</td>
+                <td>Padang</td>
+                <td>089528496623</td>
+                <td><div class="action-group">
+                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
+                </div></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Owi</td>
+                <td>woichan@gmail.com</td>
+                <td>Padang</td>
+                <td>089528496623</td>
+                <td><div class="action-group">
+                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
+                </div></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Owi</td>
+                <td>woichan@gmail.com</td>
+                <td>Padang</td>
+                <td>089528496623</td>
+                <td><div class="action-group">
+                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
+                </div></td>
+            </tr>
+        </table>
+      </div>
+  </div>
+  </main>
+
+  <!-- end main -->
+  </div>
+
+  <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      var ctx = $("#chart-line");
+      var myLineChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+          labels: ["Sedang Berjalan", "Sudah Selesai"],
+          datasets: [{
+            data: [12, 13],
+            backgroundColor: ["#717171", "#3C2E67"]
+          }]
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
