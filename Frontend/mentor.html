@@ -10,7 +10,21 @@
   <link href="assets/css/font.css" rel="stylesheet" />
   <link href="assets/css/pie chart.css" rel="stylesheet" />
 </head>
-
+<style media="print">
+    /* Menyembunyikan elemen-elemen yang tidak ingin dicetak */
+    body * {
+      visibility: hidden;
+    }
+    .print-table,
+    .print-table * {
+      visibility: visible;
+    }
+    .print-table {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
 <body>
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg fixed-top">
@@ -97,55 +111,23 @@
           <h1 class="bold">Mentor</h1>
           <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
         </div>
-        <table class="tabel">
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Email</th>
-                <th scope="col">Address</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Aksi</th>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>Owi</td>
-                <td>woichan@gmail.com</td>
-                <td>Padang</td>
-                <td>089528496623</td>
-                <td><div class="action-group">
-                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
-                </div></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Owi</td>
-                <td>woichan@gmail.com</td>
-                <td>Padang</td>
-                <td>089528496623</td>
-                <td><div class="action-group">
-                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
-                </div></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Owi</td>
-                <td>woichan@gmail.com</td>
-                <td>Padang</td>
-                <td>089528496623</td>
-                <td><div class="action-group">
-                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
-                </div></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Owi</td>
-                <td>woichan@gmail.com</td>
-                <td>Padang</td>
-                <td>089528496623</td>
-                <td><div class="action-group">
-                    <button class="btn btn-warning">Edit</button><button class="btn btn-danger">Hapus</button>
-                </div></td>
-            </tr>
+          <div id="menu">
+      <input type="text" id="searchInput" placeholder="Cari..." />
+      <button id="printBtn">Cetak</button>
+    </div>
+        <table id="myTable" class="tabel">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
         </table>
       </div>
   </div>
@@ -157,21 +139,151 @@
   <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      var ctx = $("#chart-line");
-      var myLineChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-          labels: ["Sedang Berjalan", "Sudah Selesai"],
-          datasets: [{
-            data: [12, 13],
-            backgroundColor: ["#717171", "#3C2E67"]
-          }]
+ <script>
+      $(document).ready(function () {
+        var data = [
+          { no: 1, nama: "John Doe", email: "acikiwie@gmail.com", address: "Jakarta", phone: "08123123", aksi: "<div class='action-group'><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+          { no: 1, nama: "Rizki Mufid", email: "rzikimufid@gmail.com", address: "Padang", phone: "08123123", aksi: "<div class='action-group'><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+          
+          // Data lainnya
+        ];
+
+        var itemsPerPage = 5; // Jumlah item per halaman
+        var currentPage = 1; // Halaman saat ini
+
+        function displayTableData() {
+          var startIndex = (currentPage - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+          var tableData = data.slice(startIndex, endIndex);
+
+          // Menghapus data sebelumnya dari tabel
+          $("#myTable tbody").empty();
+
+          // Menambahkan data ke tabel
+          $.each(tableData, function (index, item) {
+            var row =
+              "<tr>" +
+                "<td>" +
+              item.no +
+              "</td>" +
+              "<td>" +
+              item.nama +
+              "</td>" +
+              "<td>" +
+              item.email +
+              "</td>" +
+              "<td>" +
+              item.address +
+              "</td>" +
+              "<td>" +
+              item.phone +
+              "</td>" +
+              "<td>" +
+              item.aksi +
+              "</td>" +
+              "</tr>";
+            $("#myTable tbody").append(row);
+          });
+
+          // Memperbarui navigasi halaman
+          updatePagination();
         }
+
+        function updatePagination() {
+          var totalPages = Math.ceil(data.length / itemsPerPage);
+
+          // Menghapus navigasi halaman sebelumnya
+          $("#myTable tfoot").empty();
+
+          // Membuat navigasi halaman
+          var pagination = "<tr rowspan='3'> <td>";
+          for (var i = 1; i <= totalPages; i++) {
+            pagination +=
+              '<button class="page-btn" data-page="' +
+              i +
+              '">' +
+              i +
+              "</button>";
+          }
+          pagination += "</td></tr>";
+
+          $("#myTable tfoot").append(pagination);
+
+          // Menambahkan kelas "active" pada tombol halaman saat ini
+          $(
+            '#myTable tfoot .page-btn[data-page="' + currentPage + '"]'
+          ).addClass("active");
+        }
+
+        function searchTableData(keyword) {
+          var filteredData = data.filter(function (item) {
+             var no = item.no.toString();
+             
+              const nama = item.nama.toLowerCase();
+              const email = item.nama.toLowerCase();
+              const address = item.nama.toLowerCase();
+              const phone = item.nama.toLowerCase();
+            //   const aksi = item.nama.toLowerCase();
+             
+             
+            return (
+              nama.includes(keyword.toLowerCase()) ||
+              email.includes(keyword.toLowerCase()) ||
+              address.includes(keyword.toLowerCase()) ||
+              phone.includes(keyword.toLowerCase()) 
+              
+            );
+          });
+
+          // Memperbarui data tabel dengan hasil pencarian
+          data = filteredData;
+          currentPage = 1;
+          displayTableData();
+        }
+
+        function printTable() {
+          // Salin tabel ke dalam elemen baru dengan kelas "print-table"
+          var tfootOrigin = document.querySelector("#myTable tfoot").innerHTML;
+          $("#myTable tfoot").empty();
+          var $printTable = $("#myTable").clone().addClass("print-table");
+
+          // Buat jendela cetakan baru dan masukkan tabel ke dalamnya
+          var $printWindow = window.open("", "_blank");
+          $printWindow.document.open();
+          $printWindow.document.write(
+            "<html><head><title>Tabel Cetak</title></head><body></body></html>"
+          );
+          $printWindow.document.body.appendChild($printTable[0]);
+          $printWindow.document.close();
+
+          $("#myTable tfoot").append(tfootOrigin);
+
+          // Cetak jendela cetakan baru
+          $printWindow.print();
+        }
+
+        // Memanggil fungsi untuk menampilkan data awal
+        displayTableData();
+
+        // Memanggil fungsi untuk menampilkan data ketika tombol halaman di klik
+        $(document).on("click", "#myTable .page-btn", function () {
+          currentPage = parseInt($(this).attr("data-page"));
+          displayTableData();
+        });
+
+        // Memanggil fungsi pencarian saat pengguna memasukkan teks pada input pencarian
+        $(document).on("input", "#searchInput", function () {
+          var keyword = $(this).val();
+          searchTableData(keyword);
+        });
+
+        // Memanggil fungsi pencetakan saat tombol cetak diklik
+        $(document).on("click", "#printBtn", function () {
+          printTable();
+        });
       });
-    });
-  </script>
+    </script>
+
 </body>
 
 </html>
