@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Koding Pro</title>
+  <link href="assets/bootstap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/style.css" rel="stylesheet" />
+  <link href="assets/css/font.css" rel="stylesheet" />
+  <link href="assets/css/pie chart.css" rel="stylesheet" />
+</head>
+<style media="print">
+    /* Menyembunyikan elemen-elemen yang tidak ingin dicetak */
+    body * {
+      visibility: hidden;
+    }
+    .print-table,
+    .print-table * {
+      visibility: visible;
+    }
+    .print-table {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  </style>
+<body>
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class=" container-fluid">
+        <button class="btn btn-warning btn-sidebar" type="button" data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="navbar-toggler" type="button">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"></li>
+          </ul>
+          <span class="navbar-text em-" style="color: white">
+            Rizki Mufid
+            <img src="assets/img/pp.jpg" alt="pp" width="42" height="42" style="border-radius: 100%" /></span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- offcanvas -->
+
+    <div class="offcanvas-lg offcanvas-start sidebar-nav fixposisi text-white" tabindex="-1" id="offcanvasResponsive"
+      aria-labelledby="offcanvasResponsiveLabel" data-bs-scroll="true" style="background-color: #212130">
+      <div class="offcanvas-header justify-content-end">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#offcanvasResponsive"
+          aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="sidebar mt-3">
+          <p style="font-size: 21px; font-weight: bold" class="mb-4">
+            Koding Pro
+          </p>
+
+          <div class="profile">
+            <img src="assets/img/pp.jpg" width="62" height="62" alt="Photo Profile Pengguna"
+              style="border-radius: 100%" />
+            <p>Rizki Mufid</p>
+          </div>
+          <div class="listnav">
+            <a href="./" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/grid/dashboard.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/grid/dashboard.svg" alt="" class="img-bottom">
+              </span>Dashboard</a>
+
+            <a href="mentor.html" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/Peoples/user.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
+              </span>
+              Mentor</a>
+            <a href="kelas.html" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
+              </span>
+              Kelas</a>
+            <a href="" class="navbutton unactive">
+              <span>
+                <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
+              </span>Schedule</a>
+            <a href="jadwal.html" class="navbutton active logout-button">
+              <span>
+                <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
+                <img src="assets/svg/icon/light/logout.svg" alt="" class="img-bottom">
+              </span>
+              Logout
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end offcanvas -->
+
+    <!-- start main -->
+
+    <main class="mt-6">
+      <div class="container-fluid">
+        <div class="welcome ">
+          <h1 class="bold">Jadwal</h1>
+          <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
+        </div>
+        <div id="menu">
+            <input type="text" id="searchInput" placeholder="Cari..." />
+            <button id="printBtn">Cetak</button>
+            <a href="" class="btn"></a>
+        </div>
+        <table id="myTable" class="tabel mt-5">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">ID Jadwal</th>
+                    <th scope="col">Hari</th>
+                    <th scope="col">ID Class</th>
+                    <th scope="col">Kelas</th>
+                    <th scope="col">Mentor</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
+        </table>
+      </div>
+  </div>
+  </main>
+
+  <!-- end main -->
+  </div>
+
+  <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script>
+      $(document).ready(function () {
+        var data = [
+          { no: 1, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 2, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 3, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 4, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 5, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 6, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 7, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 8, idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+          
+          // Data lainnya
+        ];
+
+        var itemsPerPage = 5; // Jumlah item per halaman
+        var currentPage = 1; // Halaman saat ini
+
+        function displayTableData() {
+          var startIndex = (currentPage - 1) * itemsPerPage;
+          var endIndex = startIndex + itemsPerPage;
+          var tableData = data.slice(startIndex, endIndex);
+
+          // Menghapus data sebelumnya dari tabel
+          $("#myTable tbody").empty();
+
+          // Menambahkan data ke tabel
+          $.each(tableData, function (index, item) {
+            var row =
+              "<tr>" +
+              "<td>" +
+              item.no +
+              "</td>" +
+             
+              "<td>" +
+              item.idRegister +
+              "</td>" +
+              "<td>" +
+              item.teamLeader +
+              "</td>" +
+              "<td>" +
+              item.mentor +
+              "</td>" +
+              "<td>" +
+              item.paket +
+              "</td>" +
+              "<td>" +
+              item.progress +
+              "</td>" +
+              "<td>" +
+              item.aksi +
+              "</td>" +
+              "</tr>";
+            $("#myTable tbody").append(row);
+          });
+
+          // Memperbarui navigasi halaman
+          updatePagination();
+
+          // Mengatur keadaan tombol "Previous" dan "Next" berdasarkan halaman saat ini
+
+        }
+
+        function updatePagination() {
+          var totalPages = Math.ceil(data.length / itemsPerPage);
+
+          // Menghapus navigasi halaman sebelumnya
+          $("#myTable tfoot").empty();
+
+          // Membuat navigasi halaman
+          var pagination = "<tr rowspan='3'> <td>";
+          for (var i = 1; i <= totalPages; i++) {
+            pagination +=
+              '<button class="page-btn" data-page="' +
+              i +
+              '">' +
+              i +
+              "</button>";
+          }
+          pagination += "</td></tr>";
+
+          $("#myTable tfoot").append(pagination);
+
+          // Menambahkan kelas "active" pada tombol halaman saat ini
+          $(
+            '#myTable tfoot .page-btn[data-page="' + currentPage + '"]'
+          ).addClass("active");
+        }
+
+        function searchTableData(keyword) {
+          var filteredData = data.filter(function (item) {
+             var no = item.no.toString();
+             
+              const nama = item.nama.toLowerCase();
+              const email = item.nama.toLowerCase();
+              const address = item.nama.toLowerCase();
+              const phone = item.nama.toLowerCase();
+            //   const aksi = item.nama.toLowerCase();
+             
+             
+            return (
+              nama.includes(keyword.toLowerCase()) ||
+              email.includes(keyword.toLowerCase()) ||
+              address.includes(keyword.toLowerCase()) ||
+              phone.includes(keyword.toLowerCase()) 
+              
+            );
+          });
+
+          // Memperbarui data tabel dengan hasil pencarian
+          data = filteredData;
+          currentPage = 1;
+          displayTableData();
+        }
+
+        function printTable() {
+          // Salin tabel ke dalam elemen baru dengan kelas "print-table"
+          var tfootOrigin = document.querySelector("#myTable tfoot").innerHTML;
+          $("#myTable tfoot").empty();
+          var $printTable = $("#myTable").clone().addClass("print-table");
+
+          // Buat jendela cetakan baru dan masukkan tabel ke dalamnya
+          var $printWindow = window.open("", "_blank");
+          $printWindow.document.open();
+          $printWindow.document.write(
+            "<html><head><title>Tabel Cetak</title></head><body></body></html>"
+          );
+          $printWindow.document.body.appendChild($printTable[0]);
+          $printWindow.document.close();
+
+          $("#myTable tfoot").append(tfootOrigin);
+
+          // Cetak jendela cetakan baru
+          $printWindow.print();
+        }
+
+        // Memanggil fungsi untuk menampilkan data awal
+        displayTableData();
+
+        // Memanggil fungsi untuk menampilkan data ketika tombol halaman di klik
+        $(document).on("click", "#myTable .page-btn", function () {
+          currentPage = parseInt($(this).attr("data-page"));
+          displayTableData();
+        });
+
+        // Memanggil fungsi pencarian saat pengguna memasukkan teks pada input pencarian
+        $(document).on("input", "#searchInput", function () {
+          var keyword = $(this).val();
+          searchTableData(keyword);
+        });
+
+        // Memanggil fungsi pencetakan saat tombol cetak diklik
+        $(document).on("click", "#printBtn", function () {
+          printTable();
+        });
+      });
+    </script>
+
+</body>
+
+</html>

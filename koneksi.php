@@ -2,7 +2,9 @@
     $host = "localhost";
     $username = "root";
     $password = "";
-    $database = "dbkodingpro";
+    $database = "kodingpro";
     $connect= mysqli_connect($host,$username,$password,$database);
 
+
+    
 ?>

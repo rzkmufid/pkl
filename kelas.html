@@ -73,19 +73,19 @@
                 <img src="assets/svg/icon/light/grid/dashboard.svg" alt="" class="img-bottom">
               </span>Dashboard</a>
 
-            <a href="" class="navbutton active">
+            <a href="mentor.html" class="navbutton unactive">
               <span>
                 <img src="assets/svg/icon/dark/Peoples/user.svg" alt="" class="img-top">
                 <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
               </span>
               Mentor</a>
-            <a href="" class="navbutton unactive">
+            <a href="kelas.html" class="navbutton active">
               <span>
                 <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
               </span>
               Kelas</a>
-            <a href="" class="navbutton unactive">
+            <a href="jadwal.html" class="navbutton unactive">
               <span>
                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
@@ -108,21 +108,24 @@
     <main class="mt-6">
       <div class="container-fluid">
         <div class="welcome ">
-          <h1 class="bold">Mentor</h1>
+          <h1 class="bold">Kelas</h1>
           <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
         </div>
-          <div id="menu">
-      <input type="text" id="searchInput" placeholder="Cari..." />
-      <button id="printBtn">Cetak</button>
-    </div>
-        <table id="myTable" class="tabel">
+        <div id="menu">
+            <input type="text" id="searchInput" placeholder="Cari..." />
+            <button id="printBtn">Cetak</button>
+            <a href="" class="btn"></a>
+        </div>
+        <table id="myTable" class="tabel mt-5">
             <thead>
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Nama</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Phone</th>
+                    <th scope="col">ID Kelas</th>
+                    <th scope="col">ID Register</th>
+                    <th scope="col">Team Leader</th>
+                    <th scope="col">Mentor</th>
+                    <th scope="col">Paket</th>
+                    <th scope="col">Selesai / Durasi</th>
                     <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -142,8 +145,14 @@
  <script>
       $(document).ready(function () {
         var data = [
-          { no: 1, nama: "John Doe", email: "acikiwie@gmail.com", address: "Jakarta", phone: "08123123", aksi: "<div class='action-group'><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
-          { no: 1, nama: "Rizki Mufid", email: "rzikimufid@gmail.com", address: "Padang", phone: "08123123", aksi: "<div class='action-group'><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+          { no: 1, idKelas: "Angor", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 2, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 3, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 4, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 5, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 6, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 7, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
+           { no: 8, idKelas: "John Doe", idRegister: "John Doe", teamLeader: "John Doe", mentor: "acikiwie@gmail.com", paket: "Jakarta", progress: "08123123", aksi: "<div class='action-group'><button class='btn btn-primary'>Detail</button><button class='btn btn-warning'>Edit</button><button class='btn btn-danger'>Delete</button></div>"},
           
           // Data lainnya
         ];
@@ -163,20 +172,26 @@
           $.each(tableData, function (index, item) {
             var row =
               "<tr>" +
-                "<td>" +
+              "<td>" +
               item.no +
               "</td>" +
               "<td>" +
-              item.nama +
+              item.idKelas +
               "</td>" +
               "<td>" +
-              item.email +
+              item.idRegister +
               "</td>" +
               "<td>" +
-              item.address +
+              item.teamLeader +
               "</td>" +
               "<td>" +
-              item.phone +
+              item.mentor +
+              "</td>" +
+              "<td>" +
+              item.paket +
+              "</td>" +
+              "<td>" +
+              item.progress +
               "</td>" +
               "<td>" +
               item.aksi +
@@ -187,6 +202,9 @@
 
           // Memperbarui navigasi halaman
           updatePagination();
+
+          // Mengatur keadaan tombol "Previous" dan "Next" berdasarkan halaman saat ini
+
         }
 
         function updatePagination() {

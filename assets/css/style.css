@@ -1,5 +1,4 @@
-
-  @import url('https://fonts.googleapis.com/css2?family=Poppins');
+@import url("https://fonts.googleapis.com/css2?family=Poppins");
 
 :root {
   --offcanvas-width: 289px;
@@ -8,20 +7,20 @@
   --fontWeightLight: "Poppins Light";
   --fontWeightMedium: "Poppins Medium";
   --fontWeightBold: "Poppins Bold"; */
-  
+
   /* Color */
-  
+
   --backgroundColor: #171622;
   --cardColor: #212130;
   --foregroundCardColor: #2d2d3f;
   --buttonActive: #3c2e67;
   --fontColor: #fff;
-  
+
   --buttonFontUnactive: #969ba0;
   --hoverButtonUnactive: #282838;
 
   --buttonActiveColor: #3c2e67;
-  
+
   /* Element  */
   --borderRadius-sm: 8px;
   --borderRadius: 16px;
@@ -29,7 +28,7 @@
 }
 body,
 button {
-  font-family: 'Poppins', Courier, monospace
+  font-family: "Poppins", Courier, monospace;
 }
 
 body {
@@ -67,7 +66,7 @@ h1 {
 h2 {
   font-size: 32px;
 }
-p{
+p {
   font-size: 16px;
 }
 .bold {
@@ -194,9 +193,25 @@ p{
   gap: 30px;
 }
 
+.karyawandetails .gambar {
+  background-color: #3d3d54;
+  display: flex;
+  border-radius: 100%;
+  margin: auto;
+  height: 70px;
+  width: 70px;
+}
+
+.karyawandetails .gambar img {
+  display: block;
+  height: 40px;
+  width: 40px;
+  margin: auto;
+}
+
 /* HALAMAN MENTOR */
 
-.tabel{
+.tabel {
   background-color: var(--cardColor);
   border-collapse: collapse;
   width: 100%;
@@ -208,13 +223,22 @@ p{
   gap: 10px;
 }
 
-.tabel th, td {
-      padding: 20px;
-      text-align: left;
-      /* border-bottom: 1px solid #ddd; */
+.tabel th,
+td {
+  padding: 20px;
+  text-align: left;
+  /* border-bottom: 1px solid #ddd; */
 }
+.bar {
+  display: flex;
+  width: 100%;
+}
+/* form */
 
-
+/* .form {
+  width: 500px;
+  margin: auto;
+} */
 
 @media (min-width: 992px) {
   body {
