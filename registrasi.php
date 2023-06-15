@@ -172,7 +172,7 @@ body * {
                     <thead>
                         <tr>
                             <th scope="col" class="print">No</th>
-                            <th scope="col" class="print">Nama</th>
+                            <th scope="col" class="print">Team Leader</th>
                             <th scope="col" class="print">Email</th>
                             <th scope="col" class="print">Address</th>
                             <th scope="col" class="print">Phone</th>

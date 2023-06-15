@@ -8,7 +8,7 @@
     }
 
     // Menjalankan query untuk mendapatkan data dari tabel
-    $query = " SELECT registrasi.id, ";
+    $query = " SELECT * FROM registrasi ";
     $result = mysqli_query($connect, $query);
 
     // Menyimpan hasil query dalam array
@@ -164,7 +164,8 @@ body * {
                         <input type="text" class="form-control" id="searchInput" placeholder="Cari..." />
                         <button id="printBtn" class="btn btn-success" onclick="window.print()">Cetak</button>
                     </div>
-
+                    <button class="btn btn-primary " type="button" data-bs-toggle="modal"
+                        data-bs-target="#tambahMentor">Tambah Data</button>
                 </div>
                 <table id="myTable" class="tabel mt-5 print">
                     <thead>
