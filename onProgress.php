@@ -32,7 +32,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kelas - Koding Pro</title>
+    <title>Kelas - Koding Pro wokwowk</title>
     <link href="assets/bootstap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/font.css" rel="stylesheet" />
