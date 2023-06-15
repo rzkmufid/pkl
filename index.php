@@ -7,9 +7,9 @@
             $countMentor = mysqli_num_rows($resultMentor);
 
             // jumlah kelas
-            $tbl_Kelas = "SELECT * FROM kelas";
-            $resultKelas = mysqli_query($connect, $tbl_Kelas);
-            $countKelas = mysqli_num_rows($resultKelas);
+            // $tbl_Kelas = "SELECT * FROM kelas";
+            // $resultKelas = mysqli_query($connect, $tbl_Kelas);
+            // $countKelas = mysqli_num_rows($resultKelas);
         //    echo "Jumlah data dalam tabel: " . $count;
             
             
@@ -83,17 +83,27 @@
                                 <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
                             </span>
                             Mentor</a>
-                        <a href="kelas.php" class="navbutton unactive">
+                        <a href="Paket.php" class="navbutton unactive">
                             <span>
                                 <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
                             </span>
-                            Kelas</a>
-                        <a href="jadwal.php" class="navbutton unactive">
+                            Paket</a>
+                        <a href="registrasi.php" class="navbutton unactive">
                             <span>
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
-                            </span>Schedule</a>
+                            </span>Registrasi</a>
+                        <a href="onProgress.php" class="navbutton unactive">
+                            <span>
+                                <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
+                                <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
+                            </span>On Progress</a>
+                        <a href="selesai.php" class="navbutton unactive">
+                            <span>
+                                <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
+                                <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
+                            </span>Selesai</a>
                         <a href="" class="navbutton unactive logout-button">
                             <span>
                                 <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
@@ -134,7 +144,7 @@
                                                     <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="">
                                                     Jumlah Kelas
                                                 </td>
-                                                <td><?= $countKelas?></td>
+                                                <td></td>
                                             </tr>
                                         </table>
                                     </div>

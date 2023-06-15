@@ -8,7 +8,7 @@
     }
 
     // Menjalankan query untuk mendapatkan data dari tabel
-    $query = "SELECT * FROM mentor";
+    $query = "SELECT * FROM paket";
     $result = mysqli_query($connect, $query);
 
     // Menyimpan hasil query dalam array
@@ -116,13 +116,13 @@ body * {
                                 <img src="assets/svg/icon/light/grid/dashboard.svg" alt="" class="img-bottom">
                             </span>Dashboard</a>
 
-                        <a href="mentor.php" class="navbutton active">
+                        <a href="mentor.php" class="navbutton unactive">
                             <span>
                                 <img src="assets/svg/icon/dark/Peoples/user.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
                             </span>
                             Mentor</a>
-                        <a href="paket.php" class="navbutton unactive">
+                        <a href="paket.php" class="navbutton active">
                             <span>
                                 <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
@@ -156,7 +156,7 @@ body * {
         <main class="mt-6">
             <div class="container-fluid">
                 <div class="welcome ">
-                    <h1 class="bold">Mentor</h1>
+                    <h1 class="bold">Paket</h1>
                     <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
                 </div>
                 <div class="bar justify-content-between no-print">
@@ -172,10 +172,10 @@ body * {
                     <thead>
                         <tr>
                             <th scope="col" class="print">No</th>
-                            <th scope="col" class="print">Nama</th>
-                            <th scope="col" class="print">Email</th>
-                            <th scope="col" class="print">Address</th>
-                            <th scope="col" class="print">Phone</th>
+                            <th scope="col" class="print">ID Paket</th>
+                            <th scope="col" class="print">Nama Paket</th>
+                            <th scope="col" class="print">Durasi</th>
+                            <th scope="col" class="print">level</th>
                             <th scope="col" class="no-print">Aksi</th>
                         </tr>
                     </thead>
@@ -202,22 +202,25 @@ body * {
                 <div class="modal-body">
                     <div class="form mb-3 mt-3">
                         <h2 class="bold">Tambah Data Schedule</h2>
-                        <form method="post" action="Action/Mentor/postData.php" enctype="multipart/form-data">
+                        <form method="post" action="Action/Paket/postData.php" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="mentorName">Nama Mentor</label>
-                                <input type="text" class="form-control form-dark" name="mentorName">
+                                <label for="mentorName">Nama Paket</label>
+                                <input type="text" class="form-control form-dark" name="namaPaket">
                             </div>
-                            <div class="mb-3">
-                                <label for="mentorEmail">Email Mentor</label>
-                                <input type="email" class="form-control" name="mentorEmail">
+                            <div class="form-group mb-3">
+                                <label for="durasi">Durasi</label>
+                                <select class="form-select" id="durasi" name="durasi">
+                                    <option value="8">8 Pertemuan</option>
+                                    <option value="16">16 Pertemuan</option>
+                                </select>
                             </div>
-                            <div class="mb-3">
-                                <label for="mentoraddress">Address</label>
-                                <input type="text" class="form-control" name="mentorAddress">
-                            </div>
-                            <div class="mb-3">
-                                <label for="mentorPhone">No Ponsel</label>
-                                <input type="text" class="form-control" name="mentorPhone">
+                            <div class="form-group">
+                                <label for="level">Level</label>
+                                <select class="form-select" id="level" name="level">
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Expert">Expert</option>
+                                </select>
                             </div>
 
 
@@ -252,23 +255,26 @@ body * {
                     <form id="editForm">
                         <div class="form-group mb-3">
                             <label for="id">ID</label>
-                            <input type="text" class="form-control" id="id" name="id" disabled>
+                            <input type="text" class="form-control" id="idEdit" name="id" disabled>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama">
+                            <label for="namaPaket">Nama Paket</label>
+                            <input type="text" class="form-control" id="namaPaketEdit" name="namaPaket">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <label for="durasi">Durasi</label>
+                            <select class="form-select" id="durasiEdit" name="durasi">
+                                <option value="8">8 Pertemuan</option>
+                                <option value="16">16 Pertemuan</option>
+                            </select>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="hp">Nomor Ponsel</label>
-                            <input type="text" class="form-control" id="hp" name="hp">
+                            <label for="level">Level</label>
+                            <select class="form-select" id="levelEdit" name="level">
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Expert">Expert</option>
+                            </select>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveChanges">Simpan Perubahan</button>
                     </form>
@@ -328,24 +334,24 @@ body * {
                     no++ +
                     "</td>" +
                     "<td class='print'>" +
-                    item.nama +
+                    item.idPaket +
                     "</td>" +
                     "<td class='print'>" +
-                    item.email +
+                    item.namaPaket +
                     "</td>" +
                     "<td class='print'>" +
-                    item.alamat +
+                    item.durasi +
                     "</td>" +
                     "<td class='print'>" +
-                    item.hp +
+                    item.level +
                     "</td>" +
                     "<td class='print'>" +
                     "<div class='action-group  '>" +
                     '<button class="btn btn-warning edit-button no-print" data-id=' +
-                    item.idMentor +
+                    item.idPaket +
                     ">Edit</button>" +
                     '<button class="btn btn-danger delete-button no-print" data-id=' +
-                    item.idMentor +
+                    item.idPaket +
                     ">Delete</button>" +
                     "</tr>";
                 $("#myTable tbody").append(row);
@@ -437,9 +443,40 @@ body * {
         // $(document).on("click", "#printBtn", function() {
         //     printTable();
         // });
+
+        $(document).ready(function() {
+            $('#addForm').submit(function(e) {
+                e.preventDefault(); // Mencegah submit form secara default
+
+                // Mengambil nilai dari input
+                var name = $('#nama').val();
+                var email = $('#email').val();
+                var role = $('#role').val();
+
+                // Mengirim data ke server menggunakan AJAX
+                $.ajax({
+                    url: 'tambah_data.php', // Ganti dengan URL atau skrip yang menangani proses tambah data di sisi server
+                    type: 'POST',
+                    data: {
+                        name: name,
+                        email: email,
+                        role: role
+                    },
+                    success: function(response) {
+                        // Proses respons dari server setelah penambahan data berhasil
+                        console.log(response);
+                        // Lakukan tindakan selanjutnya setelah berhasil menambahkan data
+                    },
+                    error: function(xhr, status, error) {
+                        // Tangani jika terjadi kesalahan dalam permintaan AJAX
+                        console.log(xhr.responseText);
+                    }
+                });
+            });
+        });
     });
     </script>
-    <script src="assets/js/mentor.js"></script>
+    <script src="assets/js/Paket.js"></script>
 
 </body>
 

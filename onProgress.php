@@ -8,7 +8,7 @@
     }
 
     // Menjalankan query untuk mendapatkan data dari tabel
-    $query = "SELECT * FROM mentor";
+    $query = " SELECT registrasi.id, ";
     $result = mysqli_query($connect, $query);
 
     // Menyimpan hasil query dalam array
@@ -32,7 +32,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Koding Pro</title>
+    <title>Kelas - Koding Pro</title>
     <link href="assets/bootstap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/font.css" rel="stylesheet" />
@@ -116,7 +116,7 @@ body * {
                                 <img src="assets/svg/icon/light/grid/dashboard.svg" alt="" class="img-bottom">
                             </span>Dashboard</a>
 
-                        <a href="mentor.php" class="navbutton active">
+                        <a href="mentor.php" class="navbutton unactive">
                             <span>
                                 <img src="assets/svg/icon/dark/Peoples/user.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Peoples/user.svg" alt="" class="img-bottom">
@@ -127,8 +127,8 @@ body * {
                                 <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
                             </span>
-                            Paket</a>
-                        <a href="onProgress.php" class="navbutton unactive">
+                            Kelas</a>
+                        <a href="onProgress.php" class="navbutton active">
                             <span>
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
@@ -156,7 +156,7 @@ body * {
         <main class="mt-6">
             <div class="container-fluid">
                 <div class="welcome ">
-                    <h1 class="bold">Mentor</h1>
+                    <h1 class="bold">On Progress</h1>
                     <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
                 </div>
                 <div class="bar justify-content-between no-print">
@@ -164,19 +164,23 @@ body * {
                         <input type="text" class="form-control" id="searchInput" placeholder="Cari..." />
                         <button id="printBtn" class="btn btn-success" onclick="window.print()">Cetak</button>
                     </div>
-                    <button class="btn btn-primary " type="button" data-bs-toggle="modal"
-                        data-bs-target="#tambahMentor">Tambah Data</button>
-                    <!-- <a href="form_simpan_mentor.php" class="btn btn-primary">Tambah Data</a> -->
+
                 </div>
                 <table id="myTable" class="tabel mt-5 print">
                     <thead>
                         <tr>
                             <th scope="col" class="print">No</th>
-                            <th scope="col" class="print">Nama</th>
-                            <th scope="col" class="print">Email</th>
-                            <th scope="col" class="print">Address</th>
-                            <th scope="col" class="print">Phone</th>
-                            <th scope="col" class="no-print">Aksi</th>
+                            <th scope="col" class="print">ID Kelas</th>
+                            <th scope="col" class="print">ID Mentor</th>
+                            <th scope="col" class="print">Nama Mentor</th>
+                            <th scope="col" class="print">ID Paket</th>
+                            <th scope="col" class="print">Nama Paket</th>
+                            <th scope="col" class="print">Durasi Paket</th>
+                            <th scope="col" class="print">Level Paket</th>
+                            <th scope="col" class="print">ID Registrasi</th>
+                            <th scope="col" class="print">Team Leader</th>
+                            <th scope="col" class="print">Hari Masuk</th>
+                            <th scope="col" class="print">WhatsApp</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -202,7 +206,7 @@ body * {
                 <div class="modal-body">
                     <div class="form mb-3 mt-3">
                         <h2 class="bold">Tambah Data Schedule</h2>
-                        <form method="post" action="Action/Mentor/postData.php" enctype="multipart/form-data">
+                        <form method="post" action="proses_simpan_mentor.php" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="mentorName">Nama Mentor</label>
                                 <input type="text" class="form-control form-dark" name="mentorName">
@@ -339,14 +343,6 @@ body * {
                     "<td class='print'>" +
                     item.hp +
                     "</td>" +
-                    "<td class='print'>" +
-                    "<div class='action-group  '>" +
-                    '<button class="btn btn-warning edit-button no-print" data-id=' +
-                    item.idMentor +
-                    ">Edit</button>" +
-                    '<button class="btn btn-danger delete-button no-print" data-id=' +
-                    item.idMentor +
-                    ">Delete</button>" +
                     "</tr>";
                 $("#myTable tbody").append(row);
             });
@@ -439,7 +435,7 @@ body * {
         // });
     });
     </script>
-    <script src="assets/js/mentor.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </body>
 
