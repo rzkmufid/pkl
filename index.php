@@ -16,6 +16,27 @@
             $resultMentor = mysqli_query($connect, $tbl_mentor);
             $countMentor = mysqli_num_rows($resultMentor);
 
+             //jumlah kelas
+            $tbl_Kelas = "SELECT * FROM registrasi";
+            $resultKelas = mysqli_query($connect, $tbl_Kelas);
+            $countKelas = mysqli_num_rows($resultKelas);
+
+            // jumlah progres
+             $tbl_progres = "SELECT *, idRegistrasi, paket.namaPaket as namaPaket, registrasi.email as emailRegister, mentor.nama as namaMentor FROM registrasi
+    INNER JOIN paket on registrasi.idPaket = paket.idPaket
+    INNER JOIN mentor on registrasi.idMentor = mentor.idMentor
+    WHERE status = 'Progres'";
+            $resultProgres = mysqli_query($connect, $tbl_progres);
+            $countProgres = mysqli_num_rows($resultProgres);
+
+             // jumlah selesai
+             $tbl_selesai = "SELECT *, idRegistrasi, paket.namaPaket as namaPaket, registrasi.email as emailRegister, mentor.nama as namaMentor FROM registrasi
+    INNER JOIN paket on registrasi.idPaket = paket.idPaket
+    INNER JOIN mentor on registrasi.idMentor = mentor.idMentor
+    WHERE status = 'Selesai'";
+            $resultSelesai = mysqli_query($connect, $tbl_selesai);
+            $countSelesai = mysqli_num_rows($resultSelesai);
+
             // jumlah kelas
             // $tbl_Kelas = "SELECT * FROM kelas";
             // $resultKelas = mysqli_query($connect, $tbl_Kelas);
@@ -151,7 +172,7 @@
                                                     <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="">
                                                     Jumlah Kelas
                                                 </td>
-                                                <td></td>
+                                                <td><?= $countKelas?></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -252,7 +273,7 @@
             data: {
                 labels: ["Sedang Berjalan", "Sudah Selesai"],
                 datasets: [{
-                    data: [12, 13],
+                    data: [<?= $countProgres?>, <?= $countSelesai?>],
                     backgroundColor: ["#717171", "#3C2E67"]
                 }]
             }
