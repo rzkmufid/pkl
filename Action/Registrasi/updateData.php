@@ -20,16 +20,6 @@ $idPaket= $_POST['idPaket'];
 $idMentor= $_POST['idMentor'];
 $status= $_POST['status'];
 
-var_dump($id);
-var_dump($teamLeader);
-var_dump($email);
-var_dump($whatsapp);
-var_dump($hari);
-var_dump($idPaket);
-var_dump($idMentor);
-var_dump($status);
-
-
 
 // Query untuk memperbarui data dalam database berdasarkan ID
 $sql = "UPDATE registrasi SET teamLeader = '$teamLeader', email = '$email', whatsapp = '$whatsapp', hari = '$hari' , idPaket = '$idPaket' , idMentor = '$idMentor' , status = '$status' WHERE idRegistrasi = $id";

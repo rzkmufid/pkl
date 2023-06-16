@@ -1,6 +1,6 @@
 <?php
 // Menghubungkan ke database
-    include 'koneksi.php';
+    include 'Action/koneksi.php';
     // Memeriksa koneksi database
     if (mysqli_connect_errno()) {
       echo "Koneksi database gagal: " . mysqli_connect_error();
@@ -8,10 +8,10 @@
     }
 
     // Menjalankan query untuk mendapatkan data dari tabel
-    $query = "SELECT *, idRegistrasi, paket.namaPaket as namaPaket, mentor.nama as namaMentor FROM registrasi
+    $query = "SELECT *, idRegistrasi, paket.namaPaket as namaPaket, registrasi.email as emailRegister, mentor.nama as namaMentor FROM registrasi
     INNER JOIN paket on registrasi.idPaket = paket.idPaket
     INNER JOIN mentor on registrasi.idMentor = mentor.idMentor
-    WHERE status = 'progres';";
+    WHERE status = 'Progres';";
 
     $result = mysqli_query($connect, $query);
 
@@ -100,9 +100,10 @@ td {
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"></li>
+
                     </ul>
                     <span class="navbar-text em-" style="color: white">
-                        Rizki Mufid
+                        Administrator
                         <img src="assets/img/pp.jpg" alt="pp" width="42" height="42"
                             style="border-radius: 100%" /></span>
                 </div>
@@ -127,7 +128,7 @@ td {
                     <div class="profile">
                         <img src="assets/img/pp.jpg" width="62" height="62" alt="Photo Profile Pengguna"
                             style="border-radius: 100%" />
-                        <p>Rizki Mufid</p>
+                        <p>Administrator</p>
                     </div>
                     <div class="listnav">
                         <a href="./" class="navbutton unactive">
@@ -158,7 +159,8 @@ td {
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
                             </span>Selesai</a>
-                        <a href="" class="navbutton unactive logout-button">
+                        <a href="" class="navbutton unactive logout-button" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
                             <span>
                                 <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/logout.svg" alt="" class="img-bottom">
@@ -177,7 +179,7 @@ td {
             <div class="container-fluid">
                 <div class="welcome ">
                     <h1 class="bold">On Progress</h1>
-                    <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
+                    <p>Berikut data Kelas yang sedang berlangsung di PT. Koding Pro Indonesia</p>
                 </div>
                 <div class="bar justify-content-between no-print">
                     <div id="menu" class="d-flex gap-3 no-print">
@@ -275,8 +277,8 @@ td {
                             <div class="mb-3">
                                 <label for="status">Status</label>
                                 <select class="form-select" id="levelEdit" name="status">
-                                    <option value="progres">Progres</option>
-                                    <option value="selesai">Selesai</option>
+                                    <option value="Progres">Progres</option>
+                                    <option value="Selesai">Selesai</option>
                                 </select>
                             </div>
 
@@ -364,8 +366,8 @@ td {
                         <div class="form-group mb-3">
                             <label for="status">Pilih Progres</label>
                             <select class="form-select" id="status" name="status">
-                                <option value="progres">Progres</option>
-                                <option value="selesai">Selesai</option>
+                                <option value="Progres">Progres</option>
+                                <option value="Selesai">Selesai</option>
                             </select>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveChanges">Simpan Perubahan</button>
@@ -397,6 +399,25 @@ td {
         </div>
     </div>
 
+    <!-- modal logout -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true"
+        data-bs-theme="dark">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Keluar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="Action/Login/prosesLogout.php" class="btn btn-danger">Yakin</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>
@@ -433,7 +454,7 @@ td {
                     item.teamLeader +
                     "</td>" +
                     "<td class='print'>" +
-                    item.email +
+                    item.emailRegister +
                     "</td>" +
                     "<td class='print'>" +
                     item.whatsapp +
@@ -482,7 +503,7 @@ td {
             $("#myTable tfoot").empty();
 
             // Membuat navigasi halaman
-            var pagination = "<tr rowspan='3'> <td>";
+            var pagination = "<tr rowspan='3'> <td> <div class='d-flex gap-3'>";
             for (var i = 1; i <= totalPages; i++) {
                 pagination +=
                     '<button class="btn btn-secondary page-btn no-print" data-page="' +
@@ -491,7 +512,7 @@ td {
                     i +
                     "</button>";
             }
-            pagination += "</td></tr>";
+            pagination += "</div></td></tr>";
 
             $("#myTable tfoot").append(pagination);
 
@@ -502,29 +523,8 @@ td {
         }
 
         function printTable() {
-            // Salin tabel ke dalam elemen baru dengan kelas "print-table"
-            // var tfootOrigin = document.querySelector("#myTable tfoot").innerHTML;
-            // $("#myTable tfoot").empty();
-            // var $printTable = $("#myTable").clone().addClass("print-table");
-
-            // // Buat jendela cetakan baru dan masukkan tabel ke dalamnya
-            // var $printWindow = window.open("", "_blank");
-            // $printWindow.document.open();
-            // $printWindow.document.write(
-            //     "<html><head><title>Tabel Cetak</title></head><body></body></html>"
-            // );
-            // $printWindow.document.body.appendChild($printTable[0]);
-            // $printWindow.document.close();
-
-            // $("#myTable tfoot").append(tfootOrigin);
-
-            // // Cetak jendela cetakan baru
-            // $printWindow.print();
             window.print();
         }
-
-
-
 
         // Memanggil fungsi untuk menampilkan data awal
         displayTableData();
@@ -535,12 +535,6 @@ td {
             displayTableData();
         });
 
-        // Memanggil fungsi pencarian saat pengguna memasukkan teks pada input pencarian
-        // $(document).on("input", "#searchInput", function() {
-        //     var keyword = $(this).val();
-        //     searchTableData(keyword);
-        // });
-
         $(document).ready(function() {
             $('#searchInput').on('keyup', function() {
                 var value = $(this).val().toLowerCase();
@@ -549,11 +543,6 @@ td {
                 });
             });
         });
-
-        // Memanggil fungsi pencetakan saat tombol cetak diklik
-        // $(document).on("click", "#printBtn", function() {
-        //     printTable();
-        // });
     });
     </script>
     <script src="assets/js/Registrasi.js"></script>

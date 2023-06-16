@@ -1,5 +1,15 @@
 <?php
-            include "koneksi.php";
+            session_start();
+
+            // Cek apakah pengguna sudah login, jika tidak redirect ke halaman login
+            if (!isset($_SESSION['username'])) {
+                header("Location: login.php?pesan=belum_login");
+                exit();
+            }
+
+            // Ambil data pengguna dari session
+            $username = $_SESSION['username'];
+            include "Action/koneksi.php";
             
             //jumlah mentor
             $tbl_mentor = "SELECT * FROM mentor";
@@ -12,7 +22,7 @@
             // $countKelas = mysqli_num_rows($resultKelas);
         //    echo "Jumlah data dalam tabel: " . $count;
             
-            
+           
         ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,10 +50,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"></li>
+                        <li class="nav-item">
+                        </li>
                     </ul>
                     <span class="navbar-text em-" style="color: white">
-                        Rizki Mufid
+                        Administrator
                         <img src="assets/img/pp.jpg" alt="pp" width="42" height="42"
                             style="border-radius: 100%" /></span>
                 </div>
@@ -68,7 +79,7 @@
                     <div class="profile">
                         <img src="assets/img/pp.jpg" width="62" height="62" alt="Photo Profile Pengguna"
                             style="border-radius: 100%" />
-                        <p>Rizki Mufid</p>
+                        <p>Administrator</p>
                     </div>
                     <div class="listnav">
                         <a href="" class="navbutton active">
@@ -99,7 +110,8 @@
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
                             </span>Selesai</a>
-                        <a href="" class="navbutton unactive logout-button">
+                        <a href="" data-bs-toggle="modal" data-bs-target="#logoutModal"
+                            class="navbutton unactive logout-button">
                             <span>
                                 <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/logout.svg" alt="" class="img-bottom">
@@ -117,7 +129,7 @@
         <main class="mt-6">
             <div class="container-fluid">
                 <div class="welcome ">
-                    <h1 class="bold">Welcome, Rizki !</h1>
+                    <h1 class="bold">Welcome, Administrator !</h1>
                 </div>
                 <div class="row ">
                     <div class="col-sm-6">
@@ -175,7 +187,7 @@
 
                             <div class="headerKaryawan">
                                 <h2 class="bold">Mentor</h2>
-                                <a href="form_simpan_mentor.php" class="btn ">Add Mentor</a>
+                                <a href="mentor.php" class="btn ">Add Mentor</a>
                             </div>
                             <div class="listKaryawan">
                                 <?php
@@ -207,6 +219,26 @@
     </main>
 
     <!-- end main -->
+    </div>
+
+    <!-- modal logout -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true"
+        data-bs-theme="dark">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Keluar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="Action/Login/prosesLogout.php" class="btn btn-danger">Yakin</a>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>

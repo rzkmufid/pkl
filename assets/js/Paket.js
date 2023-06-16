@@ -60,17 +60,19 @@ $(document).ready(function () {
     // var id = $(this).data('id');
     var id = $('#editForm input[name="id"]').val();
     var namaPaket = $('#editForm input[name="namaPaket"]').val();
-    var durasi = $('#editForm input[name="durasi"]').val();
-    var level = $('#editForm input[name="level"]').val();
+    var durasi = $('#editForm select[name="durasi"]').val();
+    var level = $('#editForm select[name="level"]').val();
+
+    // console.log(durasi, level);
     // Menggunakan Ajax untuk mengirim perubahan ke server
     $.ajax({
       url: "Action/Paket/updateData.php", // Ganti dengan URL atau file yang sesuai untuk menyimpan perubahan
       type: "POST",
       data: {
         id: id,
-        nama: namaPaket,
-        email: durasi,
-        alamat: level,
+        namaPaket: namaPaket,
+        durasi: durasi,
+        level: level,
       },
       success: function (response) {
         // Menutup modal setelah berhasil menyimpan perubahan

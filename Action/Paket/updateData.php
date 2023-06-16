@@ -12,10 +12,9 @@ if ($conn->connect_error) {
 
 // Mendapatkan data yang dikirim melalui Ajax
 $id = $_POST['id'];
-$nama = $_POST['nama'];
-$email = $_POST['email'];
-$alamat = $_POST['alamat'];
-$hp = $_POST['hp'];
+$nama = $_POST['namaPaket'];
+$durasi = $_POST['durasi'];
+$level = $_POST['level'];
 
 // var_dump($id);
 // var_dump($nama);

@@ -1,5 +1,5 @@
 <?php
-    include "../../koneksi.php";
+    include "../koneksi.php";
 
     $teamLeader= $_POST['teamLeader'];
     $email = $_POST['email'];

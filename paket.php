@@ -1,6 +1,6 @@
 <?php
 // Menghubungkan ke database
-    include 'koneksi.php';
+    include 'Action/koneksi.php';
     // Memeriksa koneksi database
     if (mysqli_connect_errno()) {
       echo "Koneksi database gagal: " . mysqli_connect_error();
@@ -80,9 +80,10 @@ body * {
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item"></li>
+
                     </ul>
                     <span class="navbar-text em-" style="color: white">
-                        Rizki Mufid
+                        Administrator
                         <img src="assets/img/pp.jpg" alt="pp" width="42" height="42"
                             style="border-radius: 100%" /></span>
                 </div>
@@ -107,7 +108,7 @@ body * {
                     <div class="profile">
                         <img src="assets/img/pp.jpg" width="62" height="62" alt="Photo Profile Pengguna"
                             style="border-radius: 100%" />
-                        <p>Rizki Mufid</p>
+                        <p>Administrator</p>
                     </div>
                     <div class="listnav">
                         <a href="./" class="navbutton unactive">
@@ -138,7 +139,8 @@ body * {
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
                             </span>Selesai</a>
-                        <a href="" class="navbutton unactive logout-button">
+                        <a href="" class="navbutton unactive logout-button" data-bs-toggle="modal"
+                            data-bs-target="#logoutModal">
                             <span>
                                 <img src="assets/svg/icon/dark/logout.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/logout.svg" alt="" class="img-bottom">
@@ -157,7 +159,7 @@ body * {
             <div class="container-fluid">
                 <div class="welcome ">
                     <h1 class="bold">Paket</h1>
-                    <p>Berikut data mentor yang ada di PT. Koding Pro Indonesia</p>
+                    <p>Berikut Paket Pembelajaran yang ada di PT. Koding Pro Indonesia</p>
                 </div>
                 <div class="bar justify-content-between no-print">
                     <div id="menu" class="d-flex gap-3 no-print">
@@ -305,7 +307,25 @@ body * {
         </div>
     </div>
 
-
+    <!-- modal logout -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true"
+        data-bs-theme="dark">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Keluar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah anda yakin?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href="Action/Login/prosesLogout.php" class="btn btn-danger">Yakin</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/bootstap/js/bootstrap.bundle.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
@@ -371,7 +391,7 @@ body * {
             $("#myTable tfoot").empty();
 
             // Membuat navigasi halaman
-            var pagination = "<tr rowspan='3'> <td>";
+            var pagination = "<tr rowspan='3'> <td><div class='d-flex gap-3'>";
             for (var i = 1; i <= totalPages; i++) {
                 pagination +=
                     '<button class="btn btn-secondary page-btn no-print" data-page="' +
@@ -380,7 +400,7 @@ body * {
                     i +
                     "</button>";
             }
-            pagination += "</td></tr>";
+            pagination += "</div></td></tr>";
 
             $("#myTable tfoot").append(pagination);
 
@@ -391,24 +411,6 @@ body * {
         }
 
         function printTable() {
-            // Salin tabel ke dalam elemen baru dengan kelas "print-table"
-            // var tfootOrigin = document.querySelector("#myTable tfoot").innerHTML;
-            // $("#myTable tfoot").empty();
-            // var $printTable = $("#myTable").clone().addClass("print-table");
-
-            // // Buat jendela cetakan baru dan masukkan tabel ke dalamnya
-            // var $printWindow = window.open("", "_blank");
-            // $printWindow.document.open();
-            // $printWindow.document.write(
-            //     "<html><head><title>Tabel Cetak</title></head><body></body></html>"
-            // );
-            // $printWindow.document.body.appendChild($printTable[0]);
-            // $printWindow.document.close();
-
-            // $("#myTable tfoot").append(tfootOrigin);
-
-            // // Cetak jendela cetakan baru
-            // $printWindow.print();
             window.print();
         }
 
@@ -438,43 +440,7 @@ body * {
                 });
             });
         });
-
-        // Memanggil fungsi pencetakan saat tombol cetak diklik
-        // $(document).on("click", "#printBtn", function() {
-        //     printTable();
-        // });
-
-        $(document).ready(function() {
-            $('#addForm').submit(function(e) {
-                e.preventDefault(); // Mencegah submit form secara default
-
-                // Mengambil nilai dari input
-                var name = $('#nama').val();
-                var email = $('#email').val();
-                var role = $('#role').val();
-
-                // Mengirim data ke server menggunakan AJAX
-                $.ajax({
-                    url: 'tambah_data.php', // Ganti dengan URL atau skrip yang menangani proses tambah data di sisi server
-                    type: 'POST',
-                    data: {
-                        name: name,
-                        email: email,
-                        role: role
-                    },
-                    success: function(response) {
-                        // Proses respons dari server setelah penambahan data berhasil
-                        console.log(response);
-                        // Lakukan tindakan selanjutnya setelah berhasil menambahkan data
-                    },
-                    error: function(xhr, status, error) {
-                        // Tangani jika terjadi kesalahan dalam permintaan AJAX
-                        console.log(xhr.responseText);
-                    }
-                });
-            });
-        });
-    });
+    })
     </script>
     <script src="assets/js/Paket.js"></script>
 

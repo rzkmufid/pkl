@@ -21,6 +21,7 @@ $(document).ready(function () {
 });
 
 // ================================ edit data
+
 $(document).ready(function () {
   $(".edit-button").click(function () {
     var id = $(this).data("id");
@@ -55,7 +56,6 @@ $(document).ready(function () {
           "selected",
           "selected"
         );
-        // $('#editForm input[name="status"]').val(data.status);
 
         // Menampilkan modal
         $("#editModal").modal("show");
@@ -77,14 +77,6 @@ $(document).ready(function () {
     var idMentor = $('#editForm select[name="idMentor"]').val();
     var status = $('#editForm select[name="status"]').val();
 
-    console.log(id);
-    console.log(teamLeader);
-    console.log(email);
-    console.log(wa);
-    console.log(hari);
-    console.log(idPaket);
-    console.log(idMentor);
-    console.log(status);
     // Menggunakan Ajax untuk mengirim perubahan ke server
     $.ajax({
       url: "Action/Registrasi/updateData.php", // Ganti dengan URL atau file yang sesuai untuk menyimpan perubahan
@@ -104,7 +96,7 @@ $(document).ready(function () {
         $("#editModal").modal("hide");
 
         // Refresh halaman atau lakukan tindakan lain yang diperlukan
-        // location.reload();
+        location.reload();
       },
       error: function (xhr, status, error) {
         console.log("Terjadi kesalahan: " + status + " - " + error);
