@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 $id = $_POST['id'];
 
 // Query untuk mengambil data dari database berdasarkan ID
-$sql = "SELECT * FROM registrasi WHERE idMentor = $id";
+$sql = "SELECT * FROM registrasi WHERE idRegistrasi = $id";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

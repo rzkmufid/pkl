@@ -23,7 +23,7 @@ $hp = $_POST['hp'];
 // var_dump($hp);
 
 // Query untuk memperbarui data dalam database berdasarkan ID
-$sql = "UPDATE paket SET namaPaket = '$nama', durasi = '$duras', level = '$level' WHERE idPaket = $id";
+$sql = "UPDATE paket SET namaPaket = '$nama', durasi = '$durasi', level = '$level' WHERE idPaket = $id";
 if ($conn->query($sql) === TRUE) {
     echo "Perubahan berhasil disimpan";
 } else {

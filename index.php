@@ -89,11 +89,6 @@
                                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
                             </span>
                             Paket</a>
-                        <a href="registrasi.php" class="navbutton unactive">
-                            <span>
-                                <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
-                                <img src="assets/svg/icon/light/Office/list-view.svg" alt="" class="img-bottom">
-                            </span>Registrasi</a>
                         <a href="onProgress.php" class="navbutton unactive">
                             <span>
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">

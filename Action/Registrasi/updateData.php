@@ -11,19 +11,28 @@ if ($conn->connect_error) {
 }
 
 // Mendapatkan data yang dikirim melalui Ajax
-$id = $_POST['id'];
-$nama = $_POST['nama'];
-$email = $_POST['email'];
-$alamat = $_POST['alamat'];
-$hp = $_POST['hp'];
+$id= $_POST['id'];
+$teamLeader= $_POST['teamLeader'];;
+$email= $_POST['email'];
+$whatsapp= $_POST['wa'];
+$hari= $_POST['hari'];
+$idPaket= $_POST['idPaket'];
+$idMentor= $_POST['idMentor'];
+$status= $_POST['status'];
 
-// var_dump($id);
-// var_dump($nama);
-// var_dump($alamat);
-// var_dump($hp);
+var_dump($id);
+var_dump($teamLeader);
+var_dump($email);
+var_dump($whatsapp);
+var_dump($hari);
+var_dump($idPaket);
+var_dump($idMentor);
+var_dump($status);
+
+
 
 // Query untuk memperbarui data dalam database berdasarkan ID
-$sql = "UPDATE registrasi SET nama = '$nama', email = '$email', alamat = '$alamat', hp = '$hp' WHERE idMentor = $id";
+$sql = "UPDATE registrasi SET teamLeader = '$teamLeader', email = '$email', whatsapp = '$whatsapp', hari = '$hari' , idPaket = '$idPaket' , idMentor = '$idMentor' , status = '$status' WHERE idRegistrasi = $id";
 if ($conn->query($sql) === TRUE) {
     echo "Perubahan berhasil disimpan";
 } else {

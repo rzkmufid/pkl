@@ -8,14 +8,28 @@
     }
 
     // Menjalankan query untuk mendapatkan data dari tabel
-    $query = " SELECT * FROM registrasi ";
+    $query = "SELECT *, idRegistrasi, paket.namaPaket as namaPaket, mentor.nama as namaMentor FROM registrasi
+    INNER JOIN paket on registrasi.idPaket = paket.idPaket
+    INNER JOIN mentor on registrasi.idMentor = mentor.idMentor
+    WHERE status = 'progres';";
+
     $result = mysqli_query($connect, $query);
 
     // Menyimpan hasil query dalam array
     $data = array();
+    
     while ($row = mysqli_fetch_assoc($result)) {
-      $data[] = $row;
+      $data[] = $row; 
     }
+    $query1 = "SELECT * FROM `mentor`";
+    $query2 = "SELECT * FROM `paket`";
+    $query3 = "SELECT * FROM `paket`";
+    $query4 = "SELECT * FROM `mentor`";
+    $result1 = mysqli_query($connect, $query1);
+    $result2 = mysqli_query($connect, $query2);
+    $result3 = mysqli_query($connect, $query3);
+    $result4 = mysqli_query($connect, $query4);
+
 
 
     // Mengirim data dalam format JSON
@@ -32,7 +46,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Kelas - Koding Pro wokwowk</title>
+    <title>Kelas - Koding Pro</title>
     <link href="assets/bootstap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/style.css" rel="stylesheet" />
     <link href="assets/css/font.css" rel="stylesheet" />
@@ -45,6 +59,12 @@ body * {
     color: black;
 }
 
+.tabel th,
+td {
+    padding: 10px;
+    text-align: left;
+    /* border-bottom: 1px solid #ddd; */
+}
 
 .print-table {
     position: absolute;
@@ -127,7 +147,7 @@ body * {
                                 <img src="assets/svg/icon/dark/Clothes/backpack.svg" alt="" class="img-top">
                                 <img src="assets/svg/icon/light/Clothes/backpack.svg" alt="" class="img-bottom">
                             </span>
-                            Kelas</a>
+                            Paket</a>
                         <a href="onProgress.php" class="navbutton active">
                             <span>
                                 <img src="assets/svg/icon/dark/Office/list-view.svg" alt="" class="img-top">
@@ -171,17 +191,17 @@ body * {
                     <thead>
                         <tr>
                             <th scope="col" class="print">No</th>
-                            <th scope="col" class="print">ID Kelas</th>
-                            <th scope="col" class="print">ID Mentor</th>
-                            <th scope="col" class="print">Nama Mentor</th>
-                            <th scope="col" class="print">ID Paket</th>
-                            <th scope="col" class="print">Nama Paket</th>
-                            <th scope="col" class="print">Durasi Paket</th>
-                            <th scope="col" class="print">Level Paket</th>
                             <th scope="col" class="print">ID Registrasi</th>
                             <th scope="col" class="print">Team Leader</th>
-                            <th scope="col" class="print">Hari Masuk</th>
+                            <th scope="col" class="print">Email</th>
                             <th scope="col" class="print">WhatsApp</th>
+                            <th scope="col" class="print">Hari</th>
+                            <th scope="col" class="print">Nama Paket</th>
+                            <th scope="col" class="print">Durasi</th>
+                            <th scope="col" class="print">Level</th>
+                            <th scope="col" class="print">Nama Mentor</th>
+                            <th scope="col" class="print">Status</th>
+                            <th scope="col" class=" no-print ">Action</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -206,24 +226,60 @@ body * {
                 </div>
                 <div class="modal-body">
                     <div class="form mb-3 mt-3">
-                        <h2 class="bold">Tambah Data Schedule</h2>
-                        <form method="post" action="proses_simpan_mentor.php" enctype="multipart/form-data">
+                        <h2 class="bold">Tambah Registrasi</h2>
+                        <form method="post" action="Action/Registrasi/postData.php" enctype="multipart/form-data">
                             <div class="mb-3">
-                                <label for="mentorName">Nama Mentor</label>
-                                <input type="text" class="form-control form-dark" name="mentorName">
+                                <label for="teamLeader">Team Leader</label>
+                                <input type="text" class="form-control form-dark" name="teamLeader">
                             </div>
                             <div class="mb-3">
-                                <label for="mentorEmail">Email Mentor</label>
-                                <input type="email" class="form-control" name="mentorEmail">
+                                <label for="email">Email</label>
+                                <input type="email" class="form-control form-dark" name="email">
                             </div>
                             <div class="mb-3">
-                                <label for="mentoraddress">Address</label>
-                                <input type="text" class="form-control" name="mentorAddress">
+                                <label for="whatsapp">WhatsApp</label>
+                                <input type="text" class="form-control form-dark" name="whatsapp">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="hari">Hari</label>
+                                <select class="form-select" id="hari" name="hari">
+                                    <option value="Senin">Senin</option>
+                                    <option value="Selasa">Selasa</option>
+                                    <option value="Rabu">Rabu</option>
+                                    <option value="Kamis">Kamis</option>
+                                    <option value="Jumat">Jumat</option>
+                                    <option value="Sabtu">Sabtu</option>
+                                    <option value="Minggu">Minggu</option>
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="mentorPhone">No Ponsel</label>
-                                <input type="text" class="form-control" name="mentorPhone">
+                                <label for="idPaket">Pilih Paket</label>
+                                <select class="form-select" id="hari" name="idPaket">
+                                    <?php while($row2 = mysqli_fetch_array($result2)):;?>
+
+                                    <option value="<?php echo $row2[0];?>"><?php echo $row2[1];?></option>
+
+                                    <?php endwhile;?>
+                                </select>
                             </div>
+                            <div class="mb-3">
+                                <label for="idMentor">Pilih Mentor</label>
+                                <select class="form-select" id="idMentor" name="idMentor">
+                                    <?php while($row1 = mysqli_fetch_array($result1)):;?>
+
+                                    <option value="<?php echo $row1[0];?>"><?php echo $row1[1];?></option>
+
+                                    <?php endwhile;?>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="status">Status</label>
+                                <select class="form-select" id="levelEdit" name="status">
+                                    <option value="progres">Progres</option>
+                                    <option value="selesai">Selesai</option>
+                                </select>
+                            </div>
+
 
 
                             </table>
@@ -260,20 +316,57 @@ body * {
                             <input type="text" class="form-control" id="id" name="id" disabled>
                         </div>
                         <div class="form-group mb-3">
-                            <label for="nama">Nama</label>
-                            <input type="text" class="form-control" id="nama" name="nama">
+                            <label for="teamLeader">Team Leader</label>
+                            <input type="text" class="form-control" id="teamLeader" name="teamLeader">
                         </div>
                         <div class="form-group mb-3">
                             <label for="email">Email</label>
                             <input type="email" class="form-control" id="email" name="email">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="alamat">Alamat</label>
-                            <input type="text" class="form-control" id="alamat" name="alamat">
+                            <label for="wa">WhatsApp</label>
+                            <input type="number" class="form-control" id="wa" name="wa">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="hp">Nomor Ponsel</label>
-                            <input type="text" class="form-control" id="hp" name="hp">
+                            <label for="hari">Hari</label>
+                            <select class="form-select" id="hari" name="hari">
+                                <option value="Senin">Senin</option>
+                                <option value="Selasa">Selasa</option>
+                                <option value="Rabu">Rabu</option>
+                                <option value="Kamis">Kamis</option>
+                                <option value="Jumat">Jumat</option>
+                                <option value="Sabtu">Sabtu</option>
+                                <option value="Minggu">Minggu</option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="idPaket">Pilih Paket</label>
+                            <select class="form-select" id="idPaket" name="idPaket">
+                                <!-- asdasdasdasd -->
+                                <?php while($row3 = mysqli_fetch_array($result3)):;?>
+
+                                <option value="<?php echo $row3[0];?>"><?php echo $row3[1];?></option>
+
+                                <?php endwhile;?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="idMentor">Pilih Mentor</label>
+                            <select class="form-select" id="idMentor" name="idMentor">
+                                <!-- asdasdasdasd -->
+                                <?php while($row4 = mysqli_fetch_array($result4)):;?>
+
+                                <option value="<?php echo $row4[0];?>"><?php echo $row4[1];?></option>
+
+                                <?php endwhile;?>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="status">Pilih Progres</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="progres">Progres</option>
+                                <option value="selesai">Selesai</option>
+                            </select>
                         </div>
                         <button type="button" class="btn btn-primary" id="saveChanges">Simpan Perubahan</button>
                     </form>
@@ -312,6 +405,7 @@ body * {
     <script>
     $(document).ready(function() {
         var data = <?= json_encode($data)?>;
+        console.log(data);
 
         var itemsPerPage = 5; // Jumlah item per halaman
         var currentPage = 1; // Halaman saat ini
@@ -333,17 +427,43 @@ body * {
                     no++ +
                     "</td>" +
                     "<td class='print'>" +
-                    item.nama +
+                    item.idRegistrasi +
+                    "</td>" +
+                    "<td class='print'>" +
+                    item.teamLeader +
                     "</td>" +
                     "<td class='print'>" +
                     item.email +
                     "</td>" +
                     "<td class='print'>" +
-                    item.alamat +
+                    item.whatsapp +
                     "</td>" +
                     "<td class='print'>" +
-                    item.hp +
+                    item.hari +
                     "</td>" +
+                    "<td class='print'>" +
+                    item.namaPaket +
+                    "</td>" +
+                    "<td class='print'>" +
+                    item.durasi +
+                    "</td>" +
+                    "<td class='print'>" +
+                    item.level +
+                    "</td>" +
+                    "<td class='print'>" +
+                    item.namaMentor +
+                    "</td>" +
+                    "<td class='print'>" +
+                    item.status +
+                    "</td>" +
+                    "<td class='print'>" +
+                    "<div class='action-group  '>" +
+                    '<button class="btn btn-warning edit-button no-print" data-id=' +
+                    item.idRegistrasi +
+                    ' data-bs-toggle="modal"data-bs-target="#editModal">Edit</button>' +
+                    '<button class="btn btn-danger delete-button no-print" data-id=' +
+                    item.idRegistrasi +
+                    ">Delete</button></div</td>" +
                     "</tr>";
                 $("#myTable tbody").append(row);
             });
@@ -436,7 +556,7 @@ body * {
         // });
     });
     </script>
-    <script src="assets/js/script.js"></script>
+    <script src="assets/js/Registrasi.js"></script>
 
 </body>
 

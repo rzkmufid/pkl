@@ -352,7 +352,7 @@ body * {
                     ">Edit</button>" +
                     '<button class="btn btn-danger delete-button no-print" data-id=' +
                     item.idPaket +
-                    ">Delete</button>" +
+                    ">Delete</button></div</td>" +
                     "</tr>";
                 $("#myTable tbody").append(row);
             });
